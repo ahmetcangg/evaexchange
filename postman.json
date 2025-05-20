@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "abc7356d-5ad8-4e66-979d-402596888346",
+		"name": "Supertraders",
+		"description": "This Postman collection includes sample requests and responses for the EvaExchange API.\nIt demonstrates how to perform BUY and SELL share transactions, including successful cases and validation errors.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "45141926",
+		"_collection_link": "https://ahmetcangurbuz-5679069.postman.co/workspace/Ahmetcan-Gurbuz's-Workspace~0f1793f3-90cd-4ca5-86df-de9b21a6bcd8/collection/45141926-abc7356d-5ad8-4e66-979d-402596888346?action=share&source=collection_link&creator=45141926"
+	},
+	"item": [
+		{
+			"name": "Buy Share",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"portfolioId\": {{portfolioId}},\n  \"symbol\": \"{{symbol}}\",\n  \"quantity\": {{quantity}}\n}"
+				},
+				"url": "{{base_url}}/buy"
+			},
+			"response": [
+				{
+					"name": "200 OK - Buy Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"portfolioId\":1,\n    \"symbol\":\"ABC\",\n    \"quantity\":20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/buy"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"message\": \"BUY successful\",\n    \"trade\": {\n        \"portfolioId\": 1,\n        \"message\": \"Successfully bought 20 of ABC at rate 100.20\"\n    }\n}"
+				},
+				{
+					"name": "400 Bad Request - Portfolio Not Found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"portfolioId\":111,\n    \"symbol\":\"ABC\",\n    \"quantity\":20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/buy"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{ \"error\": \"Portfolio not registered.\" }"
+				},
+				{
+					"name": "400 Bad Request - Share Not Registered",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"portfolioId\":1,\n    \"symbol\":\"XXX\",\n    \"quantity\":20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/buy"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{ \"error\": \"Share not registered\" }"
+				}
+			]
+		},
+		{
+			"name": "Sell Share",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"portfolioId\": {{portfolioId}},\n  \"symbol\": \"{{symbol}}\",\n  \"quantity\": {{quantity}}\n}"
+				},
+				"url": "{{base_url}}/sell"
+			},
+			"response": [
+				{
+					"name": "200 OK - Sell Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"portfolioId\":1,\n    \"symbol\":\"ABC\",\n    \"quantity\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/sell"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"message\": \"SELL successful\",\n    \"trade\": {\n        \"portfolioId\": 1,\n        \"message\": \"Successfully sold 2 of ABC at rate 100.20\"\n    }\n}"
+				},
+				{
+					"name": "400 Bad Request - Portfolio Not Found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"portfolioId\":1111,\n    \"symbol\":\"ABC\",\n    \"quantity\":20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/sell"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{ \"error\": \"Portfolio not registered.\" }"
+				},
+				{
+					"name": "400 Bad Request - Insufficient Quantity",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"portfolioId\":1,\n    \"symbol\":\"ABC\",\n    \"quantity\":200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/sell"
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": "{ \"error\": \"Not enough shares to sell. Available: 10\" }"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:3000",
+			"type": "string"
+		}
+	]
+}
